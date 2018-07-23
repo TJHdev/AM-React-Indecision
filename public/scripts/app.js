@@ -54,48 +54,53 @@ var template = React.createElement(
   )
 );
 
-var user = {
-  name: 'Thomas Hanna',
-  age: 30,
-  location: 'York'
-};
-
-// var user = {
-//   age: 20,
-// };
-
-function getLocation(location) {
-  if (location) {
-    return React.createElement(
-      'p',
-      null,
-      'Location: ',
-      location
-    );
-  }
-}
-
-var templateTwo = React.createElement(
-  'div',
-  null,
-  React.createElement(
-    'h1',
-    null,
-    user.name ? user.name : 'Anonymous' + '!'
-  ),
-  user.age && user.age >= 18 && React.createElement(
-    'p',
-    null,
-    'Age: ',
-    user.age
-  ),
-  getLocation(user.location)
-);
-
 var appRoot = document.getElementById('app');
 
-ReactDOM.render(template, appRoot);
+var count = 0;
 
-false && 'Some age';
+var addOne = function addOne() {
+  count += 1;
+  renderCounterApp();
+};
 
-returns; // false
+var minusOne = function minusOne() {
+  count -= 1;
+  renderCounterApp();
+};
+
+var reset = function reset() {
+  count = 0;
+  renderCounterApp();
+};
+
+var renderCounterApp = function renderCounterApp() {
+  var templateTwo = React.createElement(
+    'div',
+    null,
+    React.createElement(
+      'h1',
+      null,
+      'Count: ',
+      count
+    ),
+    React.createElement(
+      'button',
+      { onClick: addOne },
+      '+1'
+    ),
+    React.createElement(
+      'button',
+      { onClick: minusOne },
+      '-1'
+    ),
+    React.createElement(
+      'button',
+      { onClick: reset },
+      'reset'
+    )
+  );
+
+  ReactDOM.render(templateTwo, appRoot);
+};
+
+renderCounterApp(); // initial render
