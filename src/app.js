@@ -13,52 +13,66 @@ const app = {
   options: ['One', 'Two', 'Three']
 };
 
-const template = (
-  <div>
-    <h1>{app.title}</h1>
-    {app.subtitle && <p>{app.subtitle}</p>}
-    <p>{app.options.length > 0 ? 'Here are your options' : 'No options'}</p>
-    
-    <ol>
-      <li>Item one</li>
-      <li>Item two</li>
-      <li>Item three</li>
-    </ol>
-  </div>
-);
+const onFormSubmit = (e) => {
+  e.preventDefault();  // prevents the full page refresh - important for react
+
+  const option = e.target.elements.option.value;
+  
+  if (option) {
+    app.options.push(option);
+    e.target.elements.option.value = '';
+    renderPage();
+  }
+};
+
+const onRemoveAll = () => {
+  app.options = [];
+  renderPage();
+};
+
+const onMakeDecision = () => {
+  const randomNum = Math.floor(Math.random() * app.options.length);
+  const option = app.options[randomNum];
+  alert(option);
+};
 
 
 const appRoot = document.getElementById('app');
 
-let count = 0;
+// const numbers = [55, 101, 1000];
 
-const addOne = () => {
-  count += 1;
-  renderCounterApp();
-};
-
-const minusOne = () => {
-  count -= 1;
-  renderCounterApp();
-}
-
-const reset = () => {
-  count = 0;
-  renderCounterApp();
-}
-
-
-const renderCounterApp = () => {
-  const templateTwo = (
+const renderPage = () => {
+  const template = (
     <div>
-      <h1>Count: {count}</h1>
-      <button onClick={addOne}>+1</button>
-      <button onClick={minusOne}>-1</button>
-      <button onClick={reset}>reset</button>
+      <h1>{app.title}</h1>
+      {app.subtitle && <p>{app.subtitle}</p>}
+      <p>{app.options.length > 0 ? 'Here are your options' : 'No options'}</p>
+      <p>{app.options.length}</p>
+      <button disabled={app.options.length === 0} onClick={onMakeDecision}>What should I do?</button>
+      <button onClick={onRemoveAll}>Remove All</button>
+      {
+        // numbers.map((number) => {
+        //   return <p key={number}>Number: {number}</p>;
+        // })
+      }
+
+      <ol>
+        {/* map over app.options getting back an array of list items (set key and text) */}
+        {
+          app.options.map((option) => {
+            return <li key={option}>{option}</li>;
+          })
+        }
+      </ol>
+      
+      <form onSubmit={onFormSubmit}>          {/* be careful not to call the referenced function */}
+        <input type="text" name="option"/>
+        <button>Add Option</button>
+      </form>
     </div>
   );
 
-  ReactDOM.render(templateTwo, appRoot);
+  ReactDOM.render(template, appRoot);
 }
 
-renderCounterApp(); // initial render
+renderPage();
