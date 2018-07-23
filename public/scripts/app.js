@@ -23,13 +23,13 @@ var onFormSubmit = function onFormSubmit(e) {
   if (option) {
     app.options.push(option);
     e.target.elements.option.value = '';
-    renderPage();
+    render();
   }
 };
 
 var onRemoveAll = function onRemoveAll() {
   app.options = [];
-  renderPage();
+  render();
 };
 
 var onMakeDecision = function onMakeDecision() {
@@ -42,7 +42,7 @@ var appRoot = document.getElementById('app');
 
 // const numbers = [55, 101, 1000];
 
-var renderPage = function renderPage() {
+var render = function render() {
   var template = React.createElement(
     'div',
     null,
@@ -103,4 +103,4 @@ var renderPage = function renderPage() {
   ReactDOM.render(template, appRoot);
 };
 
-renderPage();
+render();

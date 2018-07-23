@@ -21,13 +21,13 @@ const onFormSubmit = (e) => {
   if (option) {
     app.options.push(option);
     e.target.elements.option.value = '';
-    renderPage();
+    render();
   }
 };
 
 const onRemoveAll = () => {
   app.options = [];
-  renderPage();
+  render();
 };
 
 const onMakeDecision = () => {
@@ -41,7 +41,7 @@ const appRoot = document.getElementById('app');
 
 // const numbers = [55, 101, 1000];
 
-const renderPage = () => {
+const render = () => {
   const template = (
     <div>
       <h1>{app.title}</h1>
@@ -75,4 +75,4 @@ const renderPage = () => {
   ReactDOM.render(template, appRoot);
 }
 
-renderPage();
+render();
