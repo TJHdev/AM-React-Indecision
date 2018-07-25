@@ -6,7 +6,7 @@
   "author": "Thomas Hanna",
   "scripts": {
     "serve": "live-server public/",
-    "build": "webpack --watch",
+    "build": "webpack --watch --mode=development",
     "build-babel": "babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch"
   },
   "dependencies": {
