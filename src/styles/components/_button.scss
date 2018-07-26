@@ -5,20 +5,24 @@
   border-bottom: .6rem solid darken($purple, 10%);
   color: white;
   font-weight: bold;
-  font-size: $l-size;
-  margin-bottom: $xl-size;
+  font-size: 2.6rem;
+  margin-bottom: $m-size;
   padding: 2.4rem;
   width: 100%;
   transition: all .2s;
-  -webkit-transition: all .2s;
-  -moz-transition: all .2s;
-  -ms-transition: all .2s;
-  -o-transition: all .2s;
 }
 
 .big-button:disabled {
   opacity: .5;
 }
+
+@media only screen and (min-width: $desktop-breakpoint) {
+  .big-button {
+    margin-bottom: $xl-size;
+    font-size: $l-size;
+  }
+}
+
 
 // Button
 .button {
